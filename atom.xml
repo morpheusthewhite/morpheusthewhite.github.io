@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>morpheusthewhite&#39;s website</title>
+  <icon>http://morpheusthewhite.github.io/icon.png</icon>
+  
+  <link href="http://morpheusthewhite.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://morpheusthewhite.github.io/"/>
+  <updated>2020-12-27T20:01:22.718Z</updated>
+  <id>http://morpheusthewhite.github.io/</id>
+  
+  <author>
+    <name>morpheusthewhite</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Get rid of PDFs on GitHub</title>
+    <link href="http://morpheusthewhite.github.io/2020/12/26/get-rid-of-pdfs-on-github/"/>
+    <id>http://morpheusthewhite.github.io/2020/12/26/get-rid-of-pdfs-on-github/</id>
+    <published>2020-12-26T20:49:47.000Z</published>
+    <updated>2020-12-27T20:01:22.718Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Get-rid-of-PDFs-on-GitHub&quot;&gt;&lt;a href=&quot;#Get-rid-of-PDFs-on-GitHub&quot; class=&quot;headerlink&quot; title=&quot;Get rid of PDFs on GitHub&quot;&gt;&lt;/a&gt;Get rid of</summary>
+        
+      
+    
+    
+    
+    
+    <category term="github" scheme="http://morpheusthewhite.github.io/tags/github/"/>
+    
+    <category term="latex" scheme="http://morpheusthewhite.github.io/tags/latex/"/>
+    
+    <category term="pdf" scheme="http://morpheusthewhite.github.io/tags/pdf/"/>
+    
+    <category term="github-actions" scheme="http://morpheusthewhite.github.io/tags/github-actions/"/>
+    
+    <category term="google-drive" scheme="http://morpheusthewhite.github.io/tags/google-drive/"/>
+    
+  </entry>
+  
+</feed>
