@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Detecting Echo Chambers in social media; a graph-based approachEcho Chambers are a phenomenon that is widely present in social media nowadays.  An Echo Chamber is a group in which people that have the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Detecting Echo Chambers in social media; a graph-based approach">
+<meta property="og:url" content="http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/index.html">
+<meta property="og:site_name" content="morpheusthewhite&#39;s website">
+<meta property="og:description" content="Detecting Echo Chambers in social media; a graph-based approachEcho Chambers are a phenomenon that is widely present in social media nowadays.  An Echo Chamber is a group in which people that have the">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://morpheusthewhite.github.io/images/guardian.png">
+<meta property="og:image" content="http://morpheusthewhite.github.io/images/plot.png">
+<meta property="article:published_time" content="2021-09-12T12:49:47.000Z">
+<meta property="article:modified_time" content="2021-09-12T13:01:30.214Z">
+<meta property="article:author" content="morpheusthewhite">
+<meta property="article:tag" content="echo-chambers">
+<meta property="article:tag" content="graphs">
+<meta property="article:tag" content="network-science">
+<meta property="article:tag" content="social-media">
+<meta property="article:tag" content="polarization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morpheusthewhite.github.io/images/guardian.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Detecting Echo Chambers in social media; a graph-based approach</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="morpheusthewhite's website" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/morpheusthewhite" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/12/26/get-rid-of-pdfs-on-github/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&text=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&is_video=false&description=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Detecting Echo Chambers in social media; a graph-based approach&body=Check out this article: http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&name=Detecting Echo Chambers in social media; a graph-based approach&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&t=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Detecting-Echo-Chambers-in-social-media-a-graph-based-approach"><span class="toc-number">1.</span> <span class="toc-text">Detecting Echo Chambers in social media; a graph-based approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">1.1.</span> <span class="toc-text">References</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Detecting Echo Chambers in social media; a graph-based approach
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">morpheusthewhite's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-09-12T12:49:47.000Z" itemprop="datePublished">2021-09-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/echo-chambers/" rel="tag">echo-chambers</a>, <a class="tag-link" href="/tags/graphs/" rel="tag">graphs</a>, <a class="tag-link" href="/tags/network-science/" rel="tag">network-science</a>, <a class="tag-link" href="/tags/polarization/" rel="tag">polarization</a>, <a class="tag-link" href="/tags/social-media/" rel="tag">social-media</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Detecting-Echo-Chambers-in-social-media-a-graph-based-approach"><a href="#Detecting-Echo-Chambers-in-social-media-a-graph-based-approach" class="headerlink" title="Detecting Echo Chambers in social media; a graph-based approach"></a>Detecting Echo Chambers in social media; a graph-based approach</h1><p>Echo Chambers are a phenomenon that is widely present in social media nowadays.  An Echo Chamber is a group in which people that have the same opinions enforce their respective ideas [1].</p>
+<p>In our research, we introduce a new approach for detecting Echo Chambers which involves contents and threads. In our data model a content is represented by any online resource that is discussed; most of the time it will correspond to an online newspaper article (e.g.  <a href="https://www.theguardian.com/world/2021/jul/07/new-zealand-not-willing-to-risk-uk-style-live-with-covid-policy-says-jacinda-ardern" target="_blank" rel="noopener">https://www.theguardian.com/world/2021/jul/07/new-zealand…</a>).</p>
+<p>A thread instead corresponds to the locality discussing a content. We can more clearly see the distinction between contents and threads by considering the example in Figure 1: each of the different discussions in the picture will correspond to a thread while all of these threads are associated with the same content (the Guardian article about New Zealand).</p>
+<p><img src="/images/guardian.png" alt="Some threads associated with an online article about New Zealand"><br><em>Figure 1. Some threads associated with an online article about New Zealand.</em></p>
+<p>Of all the contents, we focus on the ones that trigger many hostile interactions between the users. We call these contents controversial.</p>
+<p>Our idea is that Echo Chambers correspond to users discussing in threads associated with controversial contents with mostly friendly interactions: this means that we expect to find groups of users who agree on a topic that is highly debated in the entire social media.</p>
+<p>Take, as an example, politics, which is known for being controversial [2].  Users discussing an article about the last U.S. elections with mostly friendly interactions may then correspond to electors of the same party, e.g. supporters of Trump.</p>
+<p>This problem is formulated on a graph that associates a user to each vertex and friendly and hostile interactions to positive and negative edges, respectively (these labels are obtained through a sentiment analyzer). Also, each thread will be associated with a different layer of the graph, thus making it a multiplex graph.<br>We find that our formulation is as hard to approximate as the Maximum Independent Set, consequently putting some limitations on solving or approximating the problem. We then propose a heuristic for solving the problem which reconstructs a solution from an LP model.</p>
+<p>Due to the unavailability of benchmarks for this problem, we resort to validate it as a clustering method, i.e. we measure how well it is able to find users that correspond to a community in the graph (by community we mean the set of users that have the same alignment). Thus, we suppose that the solution to our formulation (so an Echo Chamber) exactly corresponds to a community.<br>Some first tests, carried on synthetic data, show that it is able to reconstruct groups of users for relatively low levels of noise in the data (Figure 2).</p>
+<p><img src="/images/plot.png" alt="Performances of the heuristic on synthetic data"><br><em>Figure 2. Performances of the heuristic on synthetic data.</em></p>
+<p>We then test the performances of our heuristic on real-world data retrieved from Twitter and Reddit. In this case, the scores are low (the obtained Adjusted RAND scores are lower than 0.1). We think this is due to different reasons, the main one being the fact that the validation process that we use is not accurate: as we discussed, it assumes that an entire community corresponds to an Echo Chamber and thus it is found as a solution for our problem. This may not be true if the users discuss many different topics or the separation between communities itself is not really clear. Consequently, we think that a more appropriate validation method is able to show that our formulation is able to find echo chambers also on real-world data.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] K. Garimella, G. D. F. Morales, A. Gionis, and M. Mathioudakis, “Quantifying controversy on social media,” ACM Trans. Soc. Comput., vol. 1, no. 1, pp. 3:1–3:27, 2018. doi: 10.1145/3140565</p>
+<p>[2] M. Conover, J. Ratkiewicz, M. Francisco, B. Gonçalves, F. Menczer, and A. Flammini, “Political polarization on twitter,” in Proceedings of the International AAAI Conference on Web and Social Media, vol. 5, no. 1, 2011.</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/morpheusthewhite" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Detecting-Echo-Chambers-in-social-media-a-graph-based-approach"><span class="toc-number">1.</span> <span class="toc-text">Detecting Echo Chambers in social media; a graph-based approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">1.1.</span> <span class="toc-text">References</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&text=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&is_video=false&description=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Detecting Echo Chambers in social media; a graph-based approach&body=Check out this article: http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&title=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&name=Detecting Echo Chambers in social media; a graph-based approach&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/&t=Detecting Echo Chambers in social media; a graph-based approach" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 morpheusthewhite
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/morpheusthewhite" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'G-MXLE63SYPV', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'morpheusthewhite';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
