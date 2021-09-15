@@ -6,7 +6,7 @@
   <link href="http://morpheusthewhite.github.io/atom.xml" rel="self"/>
   
   <link href="http://morpheusthewhite.github.io/"/>
-  <updated>2021-09-15T06:33:55.978Z</updated>
+  <updated>2021-09-15T06:38:58.971Z</updated>
   <id>http://morpheusthewhite.github.io/</id>
   
   <author>
@@ -17,27 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>detecting-echo-chambers-social-media</title>
-    <link href="http://morpheusthewhite.github.io/2021/09/15/detecting-echo-chambers-social-media/"/>
-    <id>http://morpheusthewhite.github.io/2021/09/15/detecting-echo-chambers-social-media/</id>
-    <published>2021-09-15T06:33:55.978Z</published>
-    <updated>2021-09-15T06:33:55.978Z</updated>
+    <title>Detecting Echo Chambers in social media; a graph-based approach</title>
+    <link href="http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/"/>
+    <id>http://morpheusthewhite.github.io/2021/09/12/detecting-echo-chambers-social-media/</id>
+    <published>2021-09-12T12:49:47.000Z</published>
+    <updated>2021-09-15T06:38:58.971Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;hr&gt;
-&lt;p&gt;title: Detecting Echo Chambers in social media; a graph-based approach&lt;/p&gt;
-&lt;!-- title: get-rid-pf-pdfs-on-github --&gt;
-
-&lt;p&gt;date:</summary>
+    <summary type="html">&lt;h1 id=&quot;Detecting-Echo-Chambers-in-social-media-a-graph-based-approach&quot;&gt;&lt;a</summary>
         
       
     
     
     
+    
+    <category term="echo-chambers" scheme="http://morpheusthewhite.github.io/tags/echo-chambers/"/>
+    
+    <category term="graphs" scheme="http://morpheusthewhite.github.io/tags/graphs/"/>
+    
+    <category term="network-science" scheme="http://morpheusthewhite.github.io/tags/network-science/"/>
+    
+    <category term="social-media" scheme="http://morpheusthewhite.github.io/tags/social-media/"/>
+    
+    <category term="polarization" scheme="http://morpheusthewhite.github.io/tags/polarization/"/>
     
   </entry>
   
